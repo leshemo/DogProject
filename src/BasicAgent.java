@@ -9,6 +9,10 @@ import java.util.Map;
 public class BasicAgent implements IAgent {
   private final Map<String, Integer> rankingMap;
 
+  /**
+   * Default constructor
+   * @param rankingMap String is the candidate, Integer is the utility of the agent for that candidate.
+   */
   public BasicAgent(Map<String, Integer> rankingMap) {
     this.rankingMap = rankingMap;
   }
