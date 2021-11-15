@@ -6,5 +6,5 @@ import java.util.List;
 public interface IVoterList {
 
   //method that returns the list
-  List<BasicAgent> getAgentList;
+  public List<BasicAgent> getAgentList();
 }
