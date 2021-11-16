@@ -7,21 +7,21 @@ import java.util.Map;
  * a unit simplex class or library will determine the utilities for each candidate.
  */
 public class BasicAgent implements IAgent {
-  private final Map<String, Integer> rankingMap;
+  private final Map<String, Double> rankingMap;
 
   /**
    * Default constructor
    * @param rankingMap String is the candidate, Integer is the utility of the agent for that candidate.
    */
-  public BasicAgent(Map<String, Integer> rankingMap) {
+  public BasicAgent(Map<String, Double> rankingMap) {
     this.rankingMap = rankingMap;
   }
 
   @Override
-  public Map<String, Integer> getRanking() {
-    Map<String, Integer> copyMap = new HashMap<>();
+  public Map<String, Double> getRanking() {
+    Map<String, Double> copyMap = new HashMap<>();
 
-    for (Map.Entry<String, Integer> entry : this.rankingMap.entrySet()) {
+    for (Map.Entry<String, Double> entry : this.rankingMap.entrySet()) {
       copyMap.put(entry.getKey(),
               entry.getValue());
     }

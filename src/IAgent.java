@@ -9,6 +9,6 @@ public interface IAgent {
    * Getter for the ranking of an agent.
    * @return
    */
-  public Map<String, Integer> getRanking();
+  public Map<String, Double> getRanking();
 
 }
