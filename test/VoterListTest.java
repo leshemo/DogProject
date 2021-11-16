@@ -59,6 +59,31 @@ public class VoterListTest {
     new VoterList(pop1, null, w1);
   }
 
+  @Test(expected = IllegalArgumentException.class)
+  public void badPop() {
+    new VoterList(-1, cand1, w1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void badW() {
+    new VoterList(pop1, cand1, -1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void badCandPop() {
+    new VoterList(-1, null, w1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void badCandW() {
+    new VoterList(pop1, null, -1);
+  }
+
+  @Test(expected = IllegalArgumentException.class)
+  public void badPopW() {
+    new VoterList(-1, cand1, -1);
+  }
+
   @Test
   public void getAgentList() {
     for (int i = 0; i < vl1.getAgentList().size(); i++) {

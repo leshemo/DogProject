@@ -20,8 +20,8 @@ public class VoterList implements IVoterList{
    * @param w factor by which to weigh the individual utilities for each candidate
    */
   public VoterList(int population, List<String> candidates, double w) {
-    if (candidates == null) {
-      throw new IllegalArgumentException("VoterList candidates cannot be null");
+    if (candidates == null || population < 0 || w < 0) {
+      throw new IllegalArgumentException("VoterList candidates, population, or cannot be null or zero.");
     }
     this.population = population;
     this.candidates = candidates;
