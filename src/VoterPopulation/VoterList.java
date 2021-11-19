@@ -1,3 +1,5 @@
+package VoterPopulation;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,7 +23,7 @@ public class VoterList implements IVoterList{
    */
   public VoterList(int population, List<String> candidates, double w) {
     if (candidates == null || population < 0 || w < 0) {
-      throw new IllegalArgumentException("VoterList candidates, population, or cannot be null or zero.");
+      throw new IllegalArgumentException("VoterPopulation.VoterList candidates, population, or cannot be null or zero.");
     }
     this.population = population;
     this.candidates = candidates;

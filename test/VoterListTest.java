@@ -1,14 +1,17 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import VoterPopulation.BasicAgent;
+import VoterPopulation.IVoterList;
+import VoterPopulation.VoterList;
 
 import static org.junit.Assert.*;
 
 /**
- * Test class for VoterList
+ * Test class for VoterPopulation.VoterList
  */
 public class VoterListTest {
 
