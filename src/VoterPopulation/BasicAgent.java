@@ -1,6 +1,10 @@
 package VoterPopulation;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,7 +20,7 @@ public class BasicAgent implements IAgent {
    * @param rankingMap String is the candidate, Integer is the utility of the agent for that candidate.
    */
   public BasicAgent(Map<String, Double> rankingMap) {
-    this.rankingMap = rankingMap;
+    this.rankingMap = this.orderRanking(rankingMap);
   }
 
   @Override
@@ -28,5 +32,19 @@ public class BasicAgent implements IAgent {
               entry.getValue());
     }
     return copyMap;
+  }
+
+  //Makes the given ranking map ordered from high to low
+  private Map<String, Double> orderRanking(Map<String, Double> given) {
+    List<Map.Entry<String, Double>> list = new ArrayList<>(given.entrySet());
+    list.sort(Map.Entry.comparingByValue());
+    Collections.reverse(list);
+
+    Map<String, Double> result = new LinkedHashMap<>();
+    for (Map.Entry<String, Double> entry : list) {
+      result.put(entry.getKey(), entry.getValue());
+    }
+
+    return result;
   }
 }

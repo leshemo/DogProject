@@ -7,6 +7,9 @@ import java.util.List;
  */
 public interface IVoterList {
 
-  //method that returns the list
+  //method that returns the list of candidates
   public List<BasicAgent> getAgentList();
+
+  //method that returns the list of candidates
+  public List<String> getCandidateList();
 }

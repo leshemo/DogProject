@@ -1,5 +1,6 @@
 package VotingSystems;
 
+import java.util.List;
 import java.util.Map;
 
 import VoterPopulation.BasicAgent;
@@ -11,7 +12,11 @@ import VoterPopulation.BasicAgent;
 public interface IVotingSystem {
 
 
-  //method to return results, probably as a list of agent utilities of the results
-  public Map<BasicAgent, Integer> getVotingResult();
+  //method to return agent results, probably as a list of agent utilities of the results
+  public Map<BasicAgent, Double> getAgentResult();
+
+  //method to return overall ranking of results, whether it be just a single winner (plurality), or
+  //an entire ordering of candidates (Ranked)
+  public List<String> getVoteRanking();
 
 }

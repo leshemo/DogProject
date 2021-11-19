@@ -1,6 +1,7 @@
 package VoterPopulation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +10,7 @@ import java.util.Map;
  * Represents a Voter List, and creating a voter List will create the population of agents, each
  * with their own utility values for each of the candidates, so that the voting systems can be run.
  */
-public class VoterList implements IVoterList{
+public class VoterList implements IVoterList {
   private final int population;
   private final List<String> candidates;
   private final List<BasicAgent> agentList;
@@ -29,6 +30,14 @@ public class VoterList implements IVoterList{
     this.candidates = candidates;
     this.agentList = new ArrayList<>();
     this.w = w;
+    this.initAgentList();
+  }
+
+  public VoterList() {
+    this.population = 10;
+    this.candidates = Arrays.asList("A", "B", "C","D");
+    this.agentList = new ArrayList<>();
+    this.w = 0.5;
     this.initAgentList();
   }
 
@@ -76,5 +85,11 @@ public class VoterList implements IVoterList{
   public List<BasicAgent> getAgentList() {
     List<BasicAgent> copyAgentList = new ArrayList<>(this.agentList);
     return copyAgentList;
+  }
+
+  @Override
+  public List<String> getCandidateList() {
+    List<String> copyCandList = new ArrayList<>(this.candidates);
+    return copyCandList;
   }
 }
