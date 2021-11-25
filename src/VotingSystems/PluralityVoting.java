@@ -1,16 +1,20 @@
 package VotingSystems;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import VoterPopulation.BasicAgent;
 import VoterPopulation.VoterList;
 
 public class PluralityVoting implements IVotingSystem {
   private final VoterList votes;
-  private Map<String, Integer> pluralityResult = new HashMap<>(); //might not be good choice
-  private final Map<String, Double> resultList = new HashMap<>();
+  private Map<String, Integer> pluralityResult = new LinkedHashMap<>(); //might not be good choice
+  private List<String> winner = new ArrayList<>();
+  private final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
   public PluralityVoting(VoterList votes) {
     this.votes = votes;
@@ -34,25 +38,58 @@ public class PluralityVoting implements IVotingSystem {
 
     for (BasicAgent b : this.votes.getAgentList()) {
       //grab first entry in hashmap
-      String chosen = b.getRanking().get("FIRST");
-      for (int i = 0; i < this.pluralityResult.size(); i++) {
-        if (chosen.equals(this.pluralityResult.get(i))) {  //same thing as above fix
-         this.pluralityResult.get()
-        }
-        this.pluralityResult.get(chosen) =+ 1;
-      }
+     // Optional<String> firstKey = b.getRanking().keySet().stream().findFirst();
 
+
+      Map.Entry<String,Double> entry = b.getRanking().entrySet().iterator().next();
+      String chosen = entry.getKey();
+
+
+      //adds value to plurality result map
+      this.pluralityResult.put(chosen, this.pluralityResult.get(chosen) + 1);
 
     }
+
+    Map.Entry<String, Integer> maxEntry = null;
+
+    for (Map.Entry<String, Integer> entry : this.pluralityResult.entrySet())
+    {
+      if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0)
+      {
+        maxEntry = entry;
+      }
+    }
+
+    this.winner.add(maxEntry.getKey());
+
+    for (BasicAgent b : this.votes.getAgentList()) {
+      this.resultList.put(b, b.getRanking().get(this.winner.get(0)));
+    }
+
+
   }
 
   @Override
   public Map<BasicAgent, Double> getAgentResult() {
-    return null;
+    Map<BasicAgent, Double> copyMap = new HashMap<>();
+
+    for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
+      copyMap.put(entry.getKey(),
+              entry.getValue());
+    }
+    return copyMap;
   }
 
   @Override
   public List<String> getVoteRanking() {
-    return null;
+    List<String> copyWinner = new ArrayList<>(this.winner);
+
+    return copyWinner;
+  }
+
+  
+  @Override
+  public double getUtility() {
+    return 0;
   }
 }

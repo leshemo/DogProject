@@ -31,8 +31,9 @@ public class BasicAgent implements IAgent {
       copyMap.put(entry.getKey(),
               entry.getValue());
     }
-    return copyMap;
+    return this.orderRanking(copyMap);
   }
+
 
   //Makes the given ranking map ordered from high to low
   private Map<String, Double> orderRanking(Map<String, Double> given) {

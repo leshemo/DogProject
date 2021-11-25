@@ -19,4 +19,9 @@ public interface IVotingSystem {
   //an entire ordering of candidates (Ranked)
   public List<String> getVoteRanking();
 
+
+  //to return overall utility for the result of a voting system using the utilitarian or Rawlsian
+  //calculation we discussed (need to weight?)
+  public double getUtility();
+
 }
