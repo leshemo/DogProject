@@ -100,8 +100,9 @@ public class PluralityVoting implements IVotingSystem {
     //need to get the 20% lowest utilities and average them for rawlsian utility
     Double bottomPercentSize = this.resultList.size() * 0.2;
 
-    //make a new map so you can grab min each time and remove it so that the new min will be the
+    //make a new map so that you can grab min each time and remove it so that the new min will be the
     // next closest one
+    // TODO: Collection of valueset, sort, and get bottom percentage
     Map<BasicAgent, Double> copyMap = new HashMap<>();
     for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
       copyMap.put(entry.getKey(),
@@ -116,7 +117,7 @@ public class PluralityVoting implements IVotingSystem {
         }
       }
 
-      rawlsUtility += copyMap.remove(min.getKey());;
+      rawlsUtility += copyMap.remove(min.getKey());
 
     }
     rawlsUtility = rawlsUtility / bottomPercentSize;
