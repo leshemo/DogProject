@@ -22,6 +22,6 @@ public interface IVotingSystem {
 
   //to return overall utility for the result of a voting system using the utilitarian or Rawlsian
   //calculation we discussed (need to weight?)
-  public double getUtility();
+  public double getUtility(Double weight);
 
 }

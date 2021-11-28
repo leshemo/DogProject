@@ -45,4 +45,12 @@ public class PluralityVotingTest {
 
     assertEquals(s1.getVoteRanking(), expected);
   }
+
+  @Test
+  public void testUtility() {
+    s1 = new PluralityVoting();
+    Double expected = 0.3;
+
+    assertEquals(s1.getUtility(.5), expected, .001);
+  }
 }

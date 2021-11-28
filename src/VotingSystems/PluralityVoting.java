@@ -1,11 +1,11 @@
 package VotingSystems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import VoterPopulation.BasicAgent;
 import VoterPopulation.VoterList;
@@ -87,9 +87,41 @@ public class PluralityVoting implements IVotingSystem {
     return copyWinner;
   }
 
-  
+
   @Override
-  public double getUtility() {
-    return 0;
+  public double getUtility(Double weight) {
+    Double avgUtility = 0.0;
+    for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
+      avgUtility += entry.getValue();
+    }
+    avgUtility = avgUtility / this.resultList.size();
+
+    Double rawlsUtility = 0.0;
+    //need to get the 20% lowest utilities and average them for rawlsian utility
+    Double bottomPercentSize = this.resultList.size() * 0.2;
+
+    //make a new map so you can grab min each time and remove it so that the new min will be the
+    // next closest one
+    Map<BasicAgent, Double> copyMap = new HashMap<>();
+    for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
+      copyMap.put(entry.getKey(),
+              entry.getValue());
+    }
+
+    for (int i = 0; i < bottomPercentSize; i++) {
+      Map.Entry<BasicAgent, Double> min = null;
+      for (Map.Entry<BasicAgent, Double> entry : copyMap.entrySet()) {
+        if (min == null || min.getValue() > entry.getValue()) {
+          min = entry;
+        }
+      }
+
+      rawlsUtility += copyMap.remove(min.getKey());;
+
+    }
+    rawlsUtility = rawlsUtility / bottomPercentSize;
+
+
+    return (weight * avgUtility) + ((1 - weight) * rawlsUtility)  ;
   }
 }
