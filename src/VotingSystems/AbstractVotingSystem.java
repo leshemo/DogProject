@@ -21,6 +21,7 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
   protected List<String> winner = new ArrayList<>();
   protected final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
+
   public AbstractVotingSystem(VoterList votes) {
     this.votes = votes;
   }

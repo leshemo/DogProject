@@ -11,8 +11,6 @@ import VoterPopulation.BasicAgent;
 import VoterPopulation.VoterList;
 
 public class PluralityVoting extends AbstractVotingSystem {
-//  private List<String> winner = new ArrayList<>();
-//  private final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
   public PluralityVoting(VoterList votes) {
     super(votes);
