@@ -18,9 +18,10 @@ public class VoterList implements IVoterList {
 
   /**
    * Default constructor for a voter list.
+   *
    * @param population given population of agents
    * @param candidates given candidates
-   * @param w factor by which to weigh the individual utilities for each candidate
+   * @param w          factor by which to weigh the individual utilities for each candidate
    */
   public VoterList(int population, List<String> candidates, double w) {
     if (candidates == null || population < 0 || w < 0) {
@@ -35,14 +36,11 @@ public class VoterList implements IVoterList {
 
   public VoterList() {
     this.population = 10;
-    this.candidates = Arrays.asList("A", "B", "C","D");
+    this.candidates = Arrays.asList("A", "B", "C", "D");
     this.agentList = new ArrayList<>();
     this.w = 0.5;
     this.initAgentList();
   }
-
-
-
 
 
   //to create all the agents for all the candidates

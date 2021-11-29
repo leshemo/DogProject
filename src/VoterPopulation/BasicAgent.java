@@ -17,6 +17,7 @@ public class BasicAgent implements IAgent {
 
   /**
    * Default constructor
+   *
    * @param rankingMap String is the candidate, Integer is the utility of the agent for that candidate.
    */
   public BasicAgent(Map<String, Double> rankingMap) {
