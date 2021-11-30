@@ -4,11 +4,12 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import VoterPopulation.BasicAgent;
+import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
 
 public class AntipluralityVoting extends AbstractVotingSystem {
 
-  public AntipluralityVoting(VoterList voters) {
+  public AntipluralityVoting(IVoterList voters) {
     super(voters);
     this.calculateResult();
   }
@@ -54,10 +55,10 @@ public class AntipluralityVoting extends AbstractVotingSystem {
       }
     }
 
-    this.winner.add(minEntry.getKey());
+    super.winner.add(minEntry.getKey());
 
-    for (BasicAgent b : this.votes.getAgentList()) {
-      this.resultList.put(b, b.getRanking().get(this.winner.get(0)));
+    for (BasicAgent b : super.votes.getAgentList()) {
+      super.resultList.put(b, b.getRanking().get(super.winner.get(0)));
     }
   }
 

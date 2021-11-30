@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import VoterPopulation.BasicAgent;
+import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
 
 /**
@@ -17,12 +18,12 @@ import VoterPopulation.VoterList;
  * the results of a vote.
  */
 public abstract class AbstractVotingSystem implements IVotingSystem {
-  protected final VoterList votes;
+  protected final IVoterList votes;
   protected List<String> winner = new ArrayList<>();
   protected final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
 
-  public AbstractVotingSystem(VoterList votes) {
+  public AbstractVotingSystem(IVoterList votes) {
     this.votes = votes;
   }
 

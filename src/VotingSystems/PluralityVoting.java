@@ -8,11 +8,12 @@ import java.util.List;
 import java.util.Map;
 
 import VoterPopulation.BasicAgent;
+import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
 
 public class PluralityVoting extends AbstractVotingSystem {
 
-  public PluralityVoting(VoterList votes) {
+  public PluralityVoting(IVoterList votes) {
     super(votes);
     this.calculateResult();
 

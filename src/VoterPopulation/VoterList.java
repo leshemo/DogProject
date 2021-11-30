@@ -38,7 +38,15 @@ public class VoterList implements IVoterList {
     this.population = 10;
     this.candidates = Arrays.asList("A", "B", "C", "D");
     this.agentList = new ArrayList<>();
-    this.w = 0.5;
+    this.w = 0.2;
+    this.initAgentList();
+  }
+
+  public VoterList(double w) {
+    this.population = 10;
+    this.candidates = Arrays.asList("A", "B", "C", "D");
+    this.agentList = new ArrayList<>();
+    this.w = w;
     this.initAgentList();
   }
 

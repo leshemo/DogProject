@@ -11,7 +11,7 @@ import VoterPopulation.VoterList;
 
 import static org.junit.Assert.*;
 
-public class BordaVotingTest {
+public class RankedChoiceVotingTest {
 
   IVoterList v1;
   IVoterList v2;
@@ -40,7 +40,8 @@ public class BordaVotingTest {
 
   @Test
   public void testCalculate() {
-    s1 = new BordaVoting(true);
+    v1 = new VoterList(9, Arrays.asList("A", "B", "C", "D"), 0.5);
+    s1 = new RankedChoiceVoting(v1);
     List<String> expected = Arrays.asList("A");
 
     assertEquals(s1.getVoteRanking(), expected);
@@ -48,7 +49,7 @@ public class BordaVotingTest {
 
   @Test
   public void testUtility() {
-    s1 = new BordaVoting(false);
+    s1 = new RankedChoiceVoting();
     Double expected = 0.3;
 
     assertEquals(s1.getUtility(.5), expected, .001);
