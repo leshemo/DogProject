@@ -31,6 +31,23 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
 
   }
 
+  protected void findWinnerAndAddEachUtil(Map<String, Integer> givenList) {
+    Map.Entry<String, Integer> maxEntry = null;
+
+    for (Map.Entry<String, Integer> entry : givenList.entrySet()) {
+      if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+        maxEntry = entry;
+      }
+    }
+
+    this.winner.add(maxEntry.getKey());
+
+    for (BasicAgent b : this.votes.getAgentList()) {
+      this.resultList.put(b, b.getRanking().get(this.winner.get(0)));
+    }
+
+  }
+
 
   @Override
   public Map<BasicAgent, Double> getAgentResult() {
@@ -73,5 +90,15 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     rawlsUtility = rawlsUtility / bottomPercentSize;
 
     return (weight * avgUtility) + ((1 - weight) * rawlsUtility);
+  }
+
+  @Override
+  public double getProductUtility() {
+    List<Double> utilList = new ArrayList<>(this.resultList.values());
+    double product = 1;
+    for (int i = 0; i < utilList.size(); i++) {
+      product = product * utilList.get(i);
+    }
+    return product;
   }
 }
