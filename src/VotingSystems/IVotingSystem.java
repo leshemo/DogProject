@@ -24,6 +24,8 @@ public interface IVotingSystem {
   //calculation we discussed (need to weight?)
   double getUtility(Double weight);
 
+
+  //returns the product utility for the result of a voting system
   double getProductUtility();
 
 }
