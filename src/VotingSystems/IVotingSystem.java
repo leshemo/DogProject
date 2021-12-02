@@ -20,9 +20,9 @@ public interface IVotingSystem {
   List<String> getVoteRanking();
 
 
-  //to return overall utility for the result of a voting system using the utilitarian or Rawlsian
-  //calculation we discussed (need to weight?)
-  double getUtility(Double weight);
+  //to return overall utility for the result of a voting system, where the first value in the list
+  //will be the avg utility, then rawlsian utility, then the computed utility.
+  List<Double> getUtility(Double weight);
 
 
   //returns the product utility for the result of a voting system

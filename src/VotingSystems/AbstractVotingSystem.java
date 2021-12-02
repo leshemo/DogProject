@@ -70,8 +70,12 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     return copyWinner;
   }
 
+  //TODO: change to be based on oreilly, and change so that it returns List<avgUtility, rawlsUtility, computedUtility>
+  //TODO: avgUtility - all the oreilly utilities divided by population
+  //TODO: rawlsUtility - avgUtility of only the bottom 20 percent unsatisfied
+  //TODO: computedUtility - computed utility based on avgUtility, rawsUtility, and the given weight
   @Override
-  public double getUtility(Double weight) {
+  public List<Double> getUtility(Double weight) {
     Double avgUtility = 0.0;
     for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
       avgUtility += entry.getValue();
@@ -92,9 +96,12 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
 
     rawlsUtility = rawlsUtility / bottomPercentSize;
 
-    return (weight * avgUtility) + ((1 - weight) * rawlsUtility);
+    double computedUtility =  (weight * avgUtility) + ((1 - weight) * rawlsUtility);
+
+    return null;
   }
 
+  //TODO: change to be based on O'Reilly
   @Override
   public double getProductUtility() {
     List<Double> utilList = new ArrayList<>(this.resultList.values());
@@ -105,6 +112,7 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     return product;
   }
 
+  //TODO:
   @Override
   public List<Double> getOReillyScore() {
     //for every agent, do the relationship thingy for all candidates
@@ -112,6 +120,7 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     return null;
   }
 
+  //TODO:
   @Override
   public double getProductOReillyScore() {
     return 0.0;
