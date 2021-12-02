@@ -20,6 +20,7 @@ import VoterPopulation.VoterList;
 public abstract class AbstractVotingSystem implements IVotingSystem {
   protected final IVoterList votes;
   protected List<String> winner = new ArrayList<>();
+  protected List<String> winRanking = new ArrayList<>();
   protected final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
 
@@ -33,6 +34,7 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
   }
 
   protected void findWinnerAndAddEachUtil(Map<String, Integer> givenList) {
+    //TODO: change to putting entire ranking into winner
     Map.Entry<String, Integer> maxEntry = null;
 
     for (Map.Entry<String, Integer> entry : givenList.entrySet()) {
@@ -101,5 +103,17 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
       product = product * utilList.get(i);
     }
     return product;
+  }
+
+  @Override
+  public List<Double> getOReillyScore() {
+    //for every agent, do the relationship thingy for all candidates
+    //
+    return null;
+  }
+
+  @Override
+  public double getProductOReillyScore() {
+    return 0.0;
   }
 }

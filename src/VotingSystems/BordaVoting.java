@@ -32,6 +32,7 @@ public class BordaVoting extends AbstractVotingSystem {
   //Questions:
   //Should Dowdall be a variation of this? i.e. something specified in the constructor, or a whole
   //new voting system?
+  //TODO: Maybe put in a weight for points?
   private void calculateResult() {
     Map<String, Integer> bordaResult = new LinkedHashMap<>();
     Map<String, Double> dowdallResult = new LinkedHashMap<>();

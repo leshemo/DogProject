@@ -28,4 +28,11 @@ public interface IVotingSystem {
   //returns the product utility for the result of a voting system
   double getProductUtility();
 
+
+  //returns the O'Reilly Score for each agent in a result of a voting system
+  List<Double> getOReillyScore();
+
+  //returns the product of O'Reilly scores for all agents
+  double getProductOReillyScore();
+
 }

@@ -40,7 +40,7 @@ public class RankedChoiceVotingTest {
 
   @Test
   public void testCalculate() {
-    v1 = new VoterList(9, Arrays.asList("A", "B", "C", "D"), 0.5);
+    v1 = new VoterList(1000000, Arrays.asList("A", "B", "C", "D"), 0.5);
     s1 = new RankedChoiceVoting(v1);
     List<String> expected = Arrays.asList("A");
 

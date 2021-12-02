@@ -11,7 +11,7 @@ import java.util.Set;
 
 import VoterPopulation.BasicAgent;
 import VoterPopulation.IVoterList;
-import VoterPopulation.VoterList;
+
 
 public class RankedChoiceVoting extends AbstractVotingSystem {
 
