@@ -11,6 +11,9 @@ import VoterPopulation.BasicAgent;
 import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
 
+import static utility.MapUtil.orderIntMap;
+import static utility.MapUtil.orderRanking;
+
 /**
  * Abstract class for a voting system. Meant to avoid code duplication, because the public methods
  * of the IVotingSystem interface stay the same no matter the implementation. The only thing that
@@ -20,7 +23,6 @@ import VoterPopulation.VoterList;
 public abstract class AbstractVotingSystem implements IVotingSystem {
   protected final IVoterList votes;
   protected List<String> winner = new ArrayList<>();
-  protected List<String> winRanking = new ArrayList<>();
   protected final Map<BasicAgent, Double> resultList = new LinkedHashMap<>();
 
 
@@ -35,19 +37,43 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
 
   protected void findWinnerAndAddEachUtil(Map<String, Integer> givenList) {
     //TODO: change to putting entire ranking into winner
-    Map.Entry<String, Integer> maxEntry = null;
+    Map<String, Integer> copyMap = orderIntMap(givenList);
 
-    for (Map.Entry<String, Integer> entry : givenList.entrySet()) {
-      if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-        maxEntry = entry;
-      }
+    for (String key : copyMap.keySet()) {
+      this.winner.add(key);
     }
 
-    this.winner.add(maxEntry.getKey());
+//    Map.Entry<String, Integer> maxEntry = null;
+//
+//    for (Map.Entry<String, Integer> entry : givenList.entrySet()) {
+//      if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+//        maxEntry = entry;
+//      }
+//    }
+//
+//    this.winner.add(maxEntry.getKey());
 
     for (BasicAgent b : this.votes.getAgentList()) {
-      this.resultList.put(b, b.getRanking().get(this.winner.get(0)));
+      //b.getRanking().get(this.winner.get(0));
+      this.resultList.put(b, this.calculateOReilly(b));
     }
+
+  }
+
+  //calculates the O'Reilly score for a particular agent
+  //for the entire ranking of agent
+  protected double calculateOReilly(BasicAgent b) {
+    double oreillyScore = 0.0;
+    //for each candidate in ranking, get utility value and subtract from it each of the lower other
+    //candidate utilities.
+    //TODO: DEBUG, something is wrong here with the iteration
+    for (int curCand = 0; curCand < this.winner.size(); curCand++) {
+      for (int otherCand = 0; otherCand < this.winner.size() - curCand; otherCand++) {
+        oreillyScore += b.getRanking().get(this.winner.get(curCand)) - b.getRanking().get(this.winner.get(otherCand));
+      }
+
+    }
+    return 0.0;
 
   }
 
@@ -112,17 +138,19 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     return product;
   }
 
+  //TODO: IS THIS NECESSARY? Could we just change the above getUtility and getProductUtility?
+
   //TODO:
   @Override
-  public List<Double> getOReillyScore() {
+  public List<Double> getOnlyWinnerUtility() {
     //for every agent, do the relationship thingy for all candidates
-    //
+
     return null;
   }
 
   //TODO:
   @Override
-  public double getProductOReillyScore() {
+  public double getOnlyWinnerProductUtility() {
     return 0.0;
   }
 }

@@ -35,7 +35,7 @@ public class VoterList implements IVoterList {
   }
 
   public VoterList() {
-    this.population = 10;
+    this.population = 15;
     this.candidates = Arrays.asList("A", "B", "C", "D");
     this.agentList = new ArrayList<>();
     this.w = 0.2;
@@ -43,7 +43,7 @@ public class VoterList implements IVoterList {
   }
 
   public VoterList(double w) {
-    this.population = 10;
+    this.population = 15;
     this.candidates = Arrays.asList("A", "B", "C", "D");
     this.agentList = new ArrayList<>();
     this.w = w;

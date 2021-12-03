@@ -30,9 +30,9 @@ public interface IVotingSystem {
 
 
   //returns the O'Reilly Score for each agent in a result of a voting system
-  List<Double> getOReillyScore();
+  List<Double> getOnlyWinnerUtility();
 
   //returns the product of O'Reilly scores for all agents
-  double getProductOReillyScore();
+  double getOnlyWinnerProductUtility();
 
 }

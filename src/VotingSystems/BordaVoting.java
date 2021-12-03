@@ -1,6 +1,7 @@
 package VotingSystems;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -10,6 +11,9 @@ import java.util.Set;
 import VoterPopulation.BasicAgent;
 import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
+
+import static utility.MapUtil.orderIntMap;
+import static utility.MapUtil.orderRanking;
 
 public class BordaVoting extends AbstractVotingSystem {
   private final boolean dowdall;
@@ -66,15 +70,23 @@ public class BordaVoting extends AbstractVotingSystem {
       //have to do this because findWinnerAndAddEachUtil only takes in a Map<String, Integer>;
       //inefficient, there must be ways to make better
       //TODO: FIX
-      Map.Entry<String, Double> maxEntry = null;
+//      Map.Entry<String, Double> maxEntry = null;
+//
+//      for (Map.Entry<String, Double> entry : dowdallResult.entrySet()) {
+//        if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
+//          maxEntry = entry;
+//        }
+//      }
+//
+//      this.winner.add(maxEntry.getKey());
 
-      for (Map.Entry<String, Double> entry : dowdallResult.entrySet()) {
-        if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-          maxEntry = entry;
-        }
+      Map<String, Double> copyMap = orderRanking(dowdallResult);
+      List<String> reverseOrderedKeys = new ArrayList<String>(copyMap.keySet());
+
+      Collections.reverse(reverseOrderedKeys);
+      for (String key : reverseOrderedKeys) {
+        this.winner.add(key);
       }
-
-      this.winner.add(maxEntry.getKey());
 
       for (BasicAgent b : super.votes.getAgentList()) {
         super.resultList.put(b, b.getRanking().get(this.winner.get(0)));
