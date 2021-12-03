@@ -68,12 +68,12 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
     //candidate utilities.
     //TODO: DEBUG, something is wrong here with the iteration
     for (int curCand = 0; curCand < this.winner.size(); curCand++) {
-      for (int otherCand = 0; otherCand < this.winner.size() - curCand; otherCand++) {
+      for (int otherCand = curCand + 1; otherCand < this.winner.size(); otherCand++) {
         oreillyScore += b.getRanking().get(this.winner.get(curCand)) - b.getRanking().get(this.winner.get(otherCand));
       }
 
     }
-    return 0.0;
+    return oreillyScore;
 
   }
 
