@@ -1,11 +1,16 @@
 package VotingSystems;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import VoterPopulation.BasicAgent;
 import VoterPopulation.IVoterList;
 import VoterPopulation.VoterList;
+
+import static utility.MapUtil.orderIntMap;
 
 public class AntipluralityVoting extends AbstractVotingSystem {
 
@@ -47,18 +52,19 @@ public class AntipluralityVoting extends AbstractVotingSystem {
 
     }
 
-    Map.Entry<String, Integer> minEntry = null;
+    List<Map.Entry<String, Integer>> list = new ArrayList<>(antipluralityResult.entrySet());
+    list.sort(Map.Entry.comparingByValue());
 
-    for (Map.Entry<String, Integer> hash : antipluralityResult.entrySet()) {
-      if (minEntry == null || hash.getValue() > hash.getValue()) {
-        minEntry = hash;
-      }
+    Map<String, Integer> result = new LinkedHashMap<>();
+    for (Map.Entry<String, Integer> entry : list) {
+      result.put(entry.getKey(), entry.getValue());
+    }
+    for (String key : result.keySet()) {
+      super.winner.add(key);
     }
 
-    super.winner.add(minEntry.getKey());
-
     for (BasicAgent b : super.votes.getAgentList()) {
-      super.resultList.put(b, b.getRanking().get(super.winner.get(0)));
+      super.resultList.put(b, super.calculateOReilly(b));
     }
   }
 

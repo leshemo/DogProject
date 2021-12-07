@@ -69,6 +69,7 @@ public class BordaVoting extends AbstractVotingSystem {
     else {
       //have to do this because findWinnerAndAddEachUtil only takes in a Map<String, Integer>;
       //inefficient, there must be ways to make better
+
       //TODO: FIX
 //      Map.Entry<String, Double> maxEntry = null;
 //
@@ -81,15 +82,15 @@ public class BordaVoting extends AbstractVotingSystem {
 //      this.winner.add(maxEntry.getKey());
 
       Map<String, Double> copyMap = orderRanking(dowdallResult);
-      List<String> reverseOrderedKeys = new ArrayList<String>(copyMap.keySet());
+      List<String> reverseOrderedKeys = new ArrayList<>(copyMap.keySet());
 
       Collections.reverse(reverseOrderedKeys);
       for (String key : reverseOrderedKeys) {
-        this.winner.add(key);
+        super.winner.add(key);
       }
 
       for (BasicAgent b : super.votes.getAgentList()) {
-        super.resultList.put(b, b.getRanking().get(this.winner.get(0)));
+        super.resultList.put(b, super.calculateOReilly(b));
       }
     }
 

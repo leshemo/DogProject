@@ -1,6 +1,7 @@
 package VotingSystems;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -102,6 +103,7 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
   //TODO: computedUtility - computed utility based on avgUtility, rawsUtility, and the given weight
   @Override
   public List<Double> getUtility(Double weight) {
+
     Double avgUtility = 0.0;
     for (Map.Entry<BasicAgent, Double> entry : this.resultList.entrySet()) {
       avgUtility += entry.getValue();
@@ -124,7 +126,9 @@ public abstract class AbstractVotingSystem implements IVotingSystem {
 
     double computedUtility =  (weight * avgUtility) + ((1 - weight) * rawlsUtility);
 
-    return null;
+    List<Double> utilityList = Arrays.asList(avgUtility, rawlsUtility, computedUtility);
+
+    return utilityList;
   }
 
   //TODO: change to be based on O'Reilly
